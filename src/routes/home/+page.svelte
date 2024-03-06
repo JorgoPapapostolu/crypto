@@ -1,4 +1,7 @@
-<script>
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -9,6 +12,10 @@
 	<h1>
 		WELCOME to <br />CRYPTO-TRACKER
 	</h1>
+
+	<div>
+		{JSON.stringify(data)}
+	</div>
 </section>
 
 <style>
