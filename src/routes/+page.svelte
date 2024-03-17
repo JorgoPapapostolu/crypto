@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import logo from '$lib/images/bitcoin-btc-logo.svg';
+	import logoBTC from '$lib/images/bitcoin-btc-logo.svg';
+	import logoETH from '$lib/images/ethereum-eth.svg';
+	import logoADA from '$lib/images/cardano.svg';
 
 	export let data: PageData;
 
 	// Funktion zur Formatierung des Bitcoin-Preises
-	function formatBitcoinPrice(price: number): string {
+	function formatCryptoPrice(price: number): string {
 		return price.toLocaleString('de-DE', { style: 'currency', currency: 'USD' });
 	}
 </script>
@@ -18,11 +20,29 @@
 	{#if data.bitcoinPrice}
 		<p>
 			<img
-				src={logo}
+				src={logoBTC}
 				alt="BTC"
 				style="vertical-align: middle; width: 32px; height: 32px; margin-right: 8px;"
 			/>
-			{formatBitcoinPrice(data.bitcoinPrice)}
+			{formatCryptoPrice(data.bitcoinPrice)}
+		</p>
+
+		<p>
+			<img
+				src={logoETH}
+				alt="ETH"
+				style="vertical-align: middle; width: 32px; height: 32px; margin-right: 8px;"
+			/>
+			{formatCryptoPrice(data.ethereumPrice)}
+		</p>
+
+		<p>
+			<img
+				src={logoADA}
+				alt="ADA"
+				style="vertical-align: middle; width: 32px; height: 32px; margin-right: 8px;"
+			/>
+			{formatCryptoPrice(data.cardanoPrice)}
 		</p>
 	{:else}
 		<p>Lade...</p>
@@ -43,7 +63,7 @@
 		font-size: 3em;
 		color: #000000;
 		text-align: center;
-		margin: 0;
+		margin-bottom: 1;
 		padding: 20px;
 		background-color: #b8b8b8;
 		border-radius: 10px;
@@ -54,7 +74,7 @@
 	p {
 		font-size: 1.5em;
 		text-align: center;
-		margin-top: 1;
+		margin-top: 0;
 		padding: 20px;
 		background-color: #8ce48471;
 		border-radius: 10px;
