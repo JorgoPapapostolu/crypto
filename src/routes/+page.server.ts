@@ -1,13 +1,7 @@
-import type { PageServerLoad } from './$types';
+import type { PageServerLoad } from './home/$types';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const API_URL = 'https://api.coingecko.com/api/v3/coins/list';
-
-	interface CryptoPrice {
-		id: string;
-		symbol: string;
-		name: string;
-	}
+	const API_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
 
 	try {
 		const response = await fetch(API_URL);
@@ -16,8 +10,10 @@ export const load: PageServerLoad = async ({ params }) => {
 			throw new Error('Fehler beim Abrufen der Daten');
 		}
 
-		const data: CryptoPrice[] = await response.json();
-		return { data: data };
+		const data = await response.json();
+		const bitcoinPrice = data.bitcoin.usd;
+
+		return { bitcoinPrice };
 	} catch (error) {
 		console.error('Fehler:', error);
 		return { error: 'Fehler beim Abrufen der Daten' };
